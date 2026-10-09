@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASMR Index</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.6-4.5L4 8"/><path d="M4 3.5V8h4.5"/><path d="M4 13a8 8 0 0 0 14.6 4.5L20 16"/><path d="M20 20.5V16h-4.5"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24"><path d="m14.5 6-6 6 6 6"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></symbol>
+    <symbol id="i-pip" viewBox="0 0 24 24"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><rect x="12" y="11.5" width="7" height="5.5" rx="1.2" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-window" viewBox="0 0 24 24"><rect x="3" y="5" width="13" height="10" rx="2"/><path d="M8 19h11a2 2 0 0 0 2-2V10"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6"/><path d="M20 4 11 13"/><path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></symbol>
+  </svg>
+
+  <header class="top">
+    <h1 class="mark">asmr<span>index</span></h1>
+    <label class="search" id="searchbox">
+      <svg class="wave" viewBox="0 0 30 20" aria-hidden="true">
+        <rect x="1" y="7" width="3" height="6" rx="1.5"/><rect x="7" y="4" width="3" height="12" rx="1.5"/>
+        <rect x="13" y="1" width="3" height="18" rx="1.5"/><rect x="19" y="5" width="3" height="10" rx="1.5"/>
+        <rect x="25" y="8" width="3" height="4" rx="1.5"/>
+      </svg>
+      <input id="q" type="search" autocomplete="off" spellcheck="false"
+        placeholder="Search for a trigger, a creator, a roleplay…" aria-label="Search">
+      <kbd>Enter</kbd>
+    </label>
+    <div class="top-actions">
+      <button class="icon-btn" id="refresh" title="Search every site for your archive terms">
+        <svg><use href="#i-refresh"/></svg><span>Refresh</span></button>
+      <button class="icon-btn" id="openSettings" title="Settings" aria-label="Settings">
+        <svg><use href="#i-gear"/></svg></button>
+    </div>
+  </header>
+
+  <section class="activity" id="activity" hidden>
+    <p class="activity-line" id="status"></p>
+    <div class="chips" id="chips"></div>
+  </section>
+
+  <nav class="toolbar" aria-label="Filters">
+    <div class="presets" id="presets" role="group" aria-label="Quick views">
+      <button data-preset="all" title="Everything, newest first">Everything</button>
+      <button data-preset="today" title="Uploaded in the last 24 hours">New today</button>
+      <button data-preset="week" title="Most viewed among videos uploaded in the last 7 days">Top this week</button>
+      <button data-preset="month" title="Most viewed among videos uploaded in the last 30 days">Top this month</button>
+      <button data-preset="trending" title="Most views per day since upload">Trending</button>
+      <button data-preset="sleep" title="Over an hour long, most viewed first">Long, for sleep</button>
+      <button data-preset="random" title="A fresh random mix every click">Surprise me</button>
+    </div>
+    <div class="filters">
+      <label class="select"><span>Sort</span>
+        <select id="sort">
+          <option value="new">Newest</option>
+          <option value="views">Most viewed</option>
+          <option value="trending">Trending</option>
+          <option value="long">Longest</option>
+          <option value="short">Shortest</option>
+          <option value="random">Random</option>
+        </select></label>
+      <label class="select"><span>Uploaded</span>
+        <select id="time">
+          <option value="">Any time</option>
+          <option value="1">Last 24 hours</option>
+          <option value="7">Last 7 days</option>
+          <option value="30">Last 30 days</option>
+          <option value="365">Last year</option>
+        </select></label>
+      <label class="select"><span>Length</span>
+        <select id="length">
+          <option value="">Any length</option>
+          <option value="0-600">Under 10 min</option>
+          <option value="600-1800">10–30 min</option>
+          <option value="1800-3600">30–60 min</option>
+          <option value="3600-">Over 1 hour</option>
+        </select></label>
+    </div>
+  </nav>
+  <div class="pills" id="platforms" role="tablist" aria-label="Sites"></div>
+
+  <div class="elsewhere" id="elsewhere" hidden></div>
+
+  <main>
+    <div class="empty" id="empty" hidden></div>
+    <div class="grid" id="grid"></div>
+    <div id="sentinel" aria-hidden="true"></div>
+    <button class="more search" id="more" hidden></button>
+  </main>
+
+  <!-- Now playing in picture-in-picture, after the player was closed -->
+  <div class="nowpip" id="nowpip" hidden>
+    <svg><use href="#i-pip"/></svg>
+    <span id="nowpipTitle"></span>
+    <button id="nowpipOpen">Show</button>
+    <button id="nowpipStop">Stop</button>
+  </div>
+
+  <button class="newpill" id="newPill" hidden>New videos found – show them</button>
+  <div class="toast" id="toast" role="status" hidden></div>
+
+  <!-- Player -->
+  <div class="player" id="player" role="dialog" aria-modal="true" aria-labelledby="ptitle" hidden>
+    <div class="stage" id="stage"></div>
+    <div class="pbar">
+      <button class="icon-btn" id="prev" title="Previous (←)" aria-label="Previous"><svg><use href="#i-prev"/></svg></button>
+      <div class="ptext">
+        <p class="ptitle" id="ptitle"></p>
+        <p class="pmeta"><span id="pmeta"></span> <span class="mode" id="pmode"></span></p>
+      </div>
+      <select id="quality" hidden aria-label="Quality"></select>
+      <button class="pill-btn primary" id="pipBtn" title="Picture-in-picture (Alt+P)"><svg><use href="#i-pip"/></svg>Picture-in-picture</button>
+      <button class="pill-btn" id="popBtn" title="Open the player in a small always-on-top window"><svg><use href="#i-window"/></svg>Mini window</button>
+      <button class="pill-btn" id="porig"><svg><use href="#i-external"/></svg><span>Open on site</span></button>
+      <button class="icon-btn" id="next" title="Next (→)" aria-label="Next"><svg><use href="#i-next"/></svg></button>
+      <button class="icon-btn" id="close" title="Close (Esc)" aria-label="Close"><svg><use href="#i-close"/></svg></button>
+    </div>
+  </div>
+
+  <!-- Settings drawer -->
+  <div class="scrim" id="scrim" hidden></div>
+  <aside class="drawer" id="drawer" aria-labelledby="settingsTitle" hidden>
+    <div class="drawer-head">
+      <h2 id="settingsTitle">Settings</h2>
+      <button class="icon-btn" id="closeSettings" aria-label="Close settings"><svg><use href="#i-close"/></svg></button>
+    </div>
+    <p class="saved" id="saved">Changes save automatically.</p>
+
+    <section>
+      <h3>What to show</h3>
+      <label class="row"><span><b>ASMR only</b><small>Keep only videos with "ASMR" in the title or tags.</small></span>
+        <input type="checkbox" class="switch" id="strict"></label>
+      <label class="row"><span><b>18+ content</b><small>Adds the adult sites below and turns off safe search.</small></span>
+        <input type="checkbox" class="switch" id="adult"></label>
+      <label class="row"><span><b>Only videos that play here directly</b><small>Hides sites that need their own embedded player.</small></span>
+        <input type="checkbox" class="switch" id="directOnly"></label>
+    </section>
+
+    <section>
+      <h3>Sites</h3>
+      <div id="siteGroups"></div>
+    </section>
+
+    <section>
+      <h3>Archive searches</h3>
+      <p class="hint">"Refresh" searches each of these on every site. Typing in the search bar searches all sites too.</p>
+      <div class="terms" id="terms"></div>
+      <form class="add-term" id="addTerm">
+        <input id="newTerm" placeholder="Add a search, e.g. asmr hair brushing" aria-label="New search term">
+        <button>Add</button>
+      </form>
+    </section>
+
+    <section>
+      <h3>Picture-in-picture</h3>
+      <label class="row"><span><b>Pop-out button on every website</b><small>Shows the PiP button on videos on any site you visit. Chrome asks for access to all sites.</small></span>
+        <input type="checkbox" class="switch" id="pipEverywhere"></label>
+      <p class="hint">Without it, PiP still works anywhere: right-click a page → "Picture-in-picture", or press Alt+Shift+P.</p>
+    </section>
+
+    <section>
+      <h3>Archive</h3>
+      <p class="hint" id="archiveInfo"></p>
+      <button class="danger" id="clearArchive">Clear archive</button>
+    </section>
+  </aside>
+
+  <!-- Add a site -->
+  <div class="wizard" id="wizard" role="dialog" aria-modal="true" aria-labelledby="wizTitle" hidden>
+    <div class="wiz-panel">
+      <div class="wiz-head">
+        <h2 id="wizTitle">Add a site</h2>
+        <button class="icon-btn" id="wizClose" aria-label="Close"><svg><use href="#i-close"/></svg></button>
+      </div>
+      <ol class="wiz-steps" id="wizSteps"></ol>
+      <div class="wiz-body" id="wizBody"></div>
+      <div class="wiz-foot">
+        <button class="pill-btn" id="wizBack">Back</button>
+        <p class="wiz-error" id="wizError" role="alert"></p>
+        <button class="pill-btn primary" id="wizNext">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="store.js"></script>
+  <script src="pip-core.js"></script>
+  <script src="sources.js"></script>
+  <script src="custom.js"></script>
+  <script src="app.js"></script>
+  <script src="wizard.js"></script>
+</body>
+</html>

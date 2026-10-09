@@ -1,0 +1,61 @@
+{
+  "manifest_version": 3,
+  "name": "ASMR Index",
+  "version": "1.0.0",
+  "description": "Search ASMR videos across many platforms, watch them in a built-in player, and pop any video out to picture-in-picture.",
+  "permissions": ["storage", "unlimitedStorage", "scripting", "activeTab", "contextMenus"],
+  "host_permissions": [
+    "https://api.dailymotion.com/*",
+    "https://sepiasearch.org/*",
+    "https://api.vimeo.com/*",
+    "https://archive.org/*",
+    "https://lighthouse.odysee.tv/*",
+    "https://api.na-backend.odysee.com/*",
+    "https://www.googleapis.com/*",
+    "https://www.reddit.com/*",
+    "https://snapshot.search.nicovideo.jp/*",
+    "https://id.twitch.tv/*",
+    "https://api.twitch.tv/*",
+    "https://rutube.ru/*",
+    "https://api.bitchute.com/*",
+    "https://commons.wikimedia.org/*"
+  ],
+  "optional_host_permissions": [
+    "https://www.eporner.com/*",
+    "https://api.redtube.com/*",
+    "https://embed.redtube.com/*",
+    "https://www.pornhub.com/*",
+    "https://www.youporn.com/*",
+    "https://api.redgifs.com/*",
+    "<all_urls>"
+  ],
+  "content_scripts": [{
+    "matches": [
+      "https://www.dailymotion.com/*",
+      "https://geo.dailymotion.com/*",
+      "https://player.vimeo.com/*",
+      "https://www.youtube-nocookie.com/*",
+      "https://www.youtube.com/*",
+      "https://odysee.com/*",
+      "https://embed.nicovideo.jp/*",
+      "https://player.twitch.tv/*",
+      "https://rutube.ru/*",
+      "https://www.bitchute.com/*"
+    ],
+    "js": ["pip-core.js", "pip.js"],
+    "all_frames": true,
+    "run_at": "document_idle"
+  }],
+  "commands": {
+    "toggle-pip": {
+      "suggested_key": { "default": "Alt+Shift+P" },
+      "description": "Picture-in-picture for the video on the current page"
+    }
+  },
+  "background": { "service_worker": "background.js" },
+  "action": {
+    "default_title": "Open ASMR Index",
+    "default_icon": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" }
+  },
+  "icons": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" }
+}
